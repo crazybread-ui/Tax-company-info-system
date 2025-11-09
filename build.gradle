@@ -1,0 +1,50 @@
+plugins {
+    // Spring Boot plugin
+    id 'org.springframework.boot' version '3.1.2'
+    // Управление зависимостями Spring
+    id 'io.spring.dependency-management' version '1.1.0'
+    // Java
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+}
+
+dependencies {
+    // Spring MVC + REST
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    // Шаблоны Thymeleaf
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    // Интеграция Thymeleaf и Spring Security (вёрстка форм логина/логики безопасности)
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+    // Spring Data JPA + Hibernate
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // Spring Security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    // Валидация аннотациями (@Valid, @NotNull и т. п.)
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Драйвер PostgreSQL
+    runtimeOnly 'org.postgresql:postgresql'
+    // Для быстрого перезапуска в dev режиме
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // Тестовый стартер (JUnit, Spring Test и т. д.)
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+    useJUnitPlatform()
+}
